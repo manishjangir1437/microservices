@@ -1,0 +1,22 @@
+server:
+  port: 8761
+  ssl:
+    enabled: true
+    client-auth: need
+    key-store: classpath:eureka.jks
+    key-store-password: 123456
+    trust-store: classpath:eureka.jks
+    trust-store-password: 123456
+    key-alias: eureka
+
+eureka:
+  client:
+    register-with-eureka: false
+    fetch-registry: false
+  instance:
+    non-secure-port-enabled: false
+    secure-port-enabled: ${server.ssl.enabled}
+    secure-port: ${server.port}
+    status-page-url: https://localhost:${eureka.instance.secure-port}/info
+    health-check-url: https://localhost:${eureka.instance.secure-port}/health
+    home-page-url: https://localhost:${eureka.instance.secure-port}
